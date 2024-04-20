@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ssh_public_key=$1
+ssh_public_key="$1"
 
 #Check root
 is_root=$(whoami)
@@ -14,17 +14,16 @@ dnf -y install dnf-automatic
 systemctl daemon-reload
 systemctl enable --now dnf-automatic-install.timer
 
+#create kiosk user
+useradd -m kiosk
+passwd -d kiosk
+
 #Insert ssh public key in sudo user
 mkdir -p /home/kiosk/.ssh
 cat > /home/kiosk/.ssh/authorized_keys << EOF
 $ssh_public_key
 EOF
-chown -R kiosk:kiosk /home/kiosk/.ssh
 
-#create kiosk user
-useradd -m kiosk
-passwd -d kiosk
- 
 #install gnome-kiosk session
 dnf -y install gnome-kiosk-script-session
 
@@ -56,8 +55,10 @@ AutomaticLogin=kiosk
 #Enable=true
 EOF
 
-# download and install kiosk-config
-mkdir -p /home/kiosk/.local/bin /home/kiosk/.config
-curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/kiosk-config.sh > ./kiosk-config.sh
-mv ./kiosk-config.sh /usr/bin/kiosk-config
+# Download and install kiosk-config
+curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/kiosk-config.sh > /usr/bin/kiosk-config
 chmod +x /usr/bin/kiosk-config
+
+# Permissions kiosk home folder
+mkdir -p /home/kiosk/.local/bin /home/kiosk/.config
+chown -R kiosk:kiosk /home/kiosk
