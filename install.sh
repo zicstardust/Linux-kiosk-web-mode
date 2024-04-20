@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 ssh_public_key="$1"
 
 #Check root
 is_root=$(whoami)
 if [ ! $is_root == "root" ]; then
-    echo "por favor, executar como root"
+    echo "Please, run as root"
     exit 2
 fi
 

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/bash
+
 is_root=$(whoami)
 if [ ! $is_root == "root" ]; then
     echo "Please, run as root"

@@ -15,7 +15,7 @@ curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/ins
 ### With SSH public KEY
 ```bash
 ssh_public_key="YOUR PUBLIC KEY HERE"
-curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/install.sh | bash -s $ssh_public_key
+curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/install.sh | bash -s "$ssh_public_key"
 ```
 
 ## Use
