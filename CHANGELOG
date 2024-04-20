@@ -1,0 +1,10 @@
+# 1.2
+- Removed ssh public key
+- auto update kiosk where update kiosk link
+- auto reboot kiosk machine where enable/disable kiosk mode
+
+# 1.1
+- Bugfixes
+
+# 1.0
+- Initial version
