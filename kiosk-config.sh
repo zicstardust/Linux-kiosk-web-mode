@@ -14,10 +14,12 @@ fi
 if [ "$1" == "enable" ]; then
     sed -i 's/AutomaticLoginEnable=False/AutomaticLoginEnable=True/g' /etc/gdm/custom.conf
     echo "Kiosk enable"
+    reboot
     exit 0
 elif [ "$1" == "disable" ]; then
     sed -i 's/AutomaticLoginEnable=True/AutomaticLoginEnable=False/g' /etc/gdm/custom.conf
     echo "Kiosk disable"
+    reboot
     exit 0
 fi
 
@@ -29,4 +31,5 @@ exec "\$0" "\$@"
 CONFIG
 chmod +x /home/kiosk/.local/bin/gnome-kiosk-script
 echo "Set kiosk: $1"
+killall firefox
 exit 0

@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 
-ssh_public_key="$1"
-
 #Check root
 is_root=$(whoami)
 if [ ! $is_root == "root" ]; then
@@ -17,12 +15,6 @@ systemctl enable --now dnf-automatic-install.timer
 #create kiosk user
 useradd -m kiosk
 passwd -d kiosk
-
-#Insert ssh public key in sudo user
-mkdir -p /home/kiosk/.ssh
-cat > /home/kiosk/.ssh/authorized_keys << EOF
-$ssh_public_key
-EOF
 
 #install gnome-kiosk session
 dnf -y install gnome-kiosk-script-session
