@@ -7,22 +7,31 @@
 
 ## Install
 
+### Without SSH public KEY
 ```bash
-pass
+curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/install.sh | bash
 ```
 
-## Configure
-
+### With SSH public KEY
 ```bash
-kiosk-config <link>
+ssh_public_key="YOUR PUBLIC KEY HERE"
+curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/install.sh | bash -s $ssh_public_key
 ```
 
+## Use
 
+### Configure
+```bash
+link="YOUR LINK HTTP/HTTPS HERE"
+kiosk-config $link
+```
+
+### Enable
 ```bash
 kiosk-config enable
 ```
 
-
+### Disable
 ```bash
 kiosk-config disable
 ```
