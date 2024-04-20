@@ -8,9 +8,11 @@ if [ ! $is_root == "root" ]; then
 fi
 
 #Enable automatic updates
-dnf -y install dnf-automatic
-systemctl daemon-reload
-systemctl enable --now dnf-automatic-install.timer
+if [ ! "$EnableAutoUpdate" == "False" ]; then
+    dnf -y install dnf-automatic
+    systemctl daemon-reload
+    systemctl enable --now dnf-automatic-install.timer
+fi
 
 #create kiosk user
 useradd -m kiosk

@@ -8,7 +8,13 @@
 
 ## Install
 
+#### Default: DNF auto update enable
 ```bash
+curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/install.sh | sudo bash
+```
+#### Alternative: Disable dnf auto update
+```bash
+export EnableAutoUpdate="False"
 curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/install.sh | sudo bash
 ```
 
