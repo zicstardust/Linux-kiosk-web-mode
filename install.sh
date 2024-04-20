@@ -59,5 +59,5 @@ EOF
 # download and install kiosk-config
 mkdir -p /home/kiosk/.local/bin /home/kiosk/.config
 curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/kiosk-config.sh > ./kiosk-config.sh
-mv ./kiosk-config.sh /home/kiosk/.local/bin/kiosk-config
-chmod +x /home/kiosk/.local/bin/kiosk-config
+mv ./kiosk-config.sh /usr/bin/kiosk-config
+chmod +x /usr/bin/kiosk-config
