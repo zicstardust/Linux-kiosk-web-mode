@@ -20,17 +20,31 @@ curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/ins
 
 ## Use
 
-### Configure
+### Configure:
 ```bash
-sudo kiosk-config "<YOUR LINK HTTP/HTTPS HERE>"
+sudo kiosk-config set "<YOUR LINK HTTP/HTTPS HERE>"
 ```
 
-### Enable
+### Enable/Disable kiosk mode:
+
+#### Enable (Default):
 ```bash
 sudo kiosk-config enable
 ```
 
-### Disable
+#### Disable:
 ```bash
 sudo kiosk-config disable
+```
+
+### Change Wayland or X11
+
+#### Use Wayland (Default):
+```bash
+sudo kiosk-config session wayland
+```
+
+#### Use X11:
+```bash
+sudo kiosk-config session x11
 ```

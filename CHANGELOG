@@ -1,3 +1,8 @@
+# 1.3
+- Add option to disable DNF autoupdate
+- Add "set" option - change kiosk link
+- Add "session" option - switch X11 or Wayland session
+
 # 1.2
 - Removed ssh public key
 - auto update kiosk where update kiosk link
