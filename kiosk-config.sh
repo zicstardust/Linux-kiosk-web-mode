@@ -1,6 +1,35 @@
 #!/usr/bin/bash
 arg1="$1"
 arg2="$2"
+arg3="$3"
+
+help(){
+    cat > /tmp/kiosk-config << HELP
+LINUX KIOSK MODE
+How to use:
+
+kiosk-config set "<YOUR URL HERE>"
+kiosk-config set "<YOUR URL HERE>" --reboot
+    Set kiosk URL
+
+kiosk-config enable
+kiosk-config on
+    Enable autologin kiosk user
+
+kiosk-config disable
+kiosk-config off
+    Disable autologin kiosk user
+
+kiosk-config session x11
+    Kiosk in X11 session
+
+kiosk-config session wayland
+    Kiosk in Wayland session
+
+HELP
+    cat /tmp/kiosk-config
+    rm -f /tmp/kiosk-config
+}
 
 session(){
   if [ -z "$arg2" ]; then
@@ -35,31 +64,39 @@ exec "\$0" "\$@"
 CONFIG
     chmod +x /home/kiosk/.local/bin/gnome-kiosk-script
     echo "Set kiosk: $arg2"
-    killall firefox &> /dev/null
+    if [ "$arg3" == "--reboot" ]; then
+        reboot
+    else
+        killall firefox &> /dev/null
+    fi
 }
 
 main () {
-    if [ -z "$arg1" ]; then
-        echo "parameter missing"
-        exit 1
-    fi
-
-    if [ "$arg1" == "enable" ]; then
-        sed -i 's/AutomaticLoginEnable=False/AutomaticLoginEnable=True/g' /etc/gdm/custom.conf
-        echo "Kiosk enable"
-        reboot
-    elif [ "$arg1" == "disable" ]; then
-        sed -i 's/AutomaticLoginEnable=True/AutomaticLoginEnable=False/g' /etc/gdm/custom.conf
-        echo "Kiosk disable"
-        reboot
-    elif [ "$arg1" == "set" ]; then
-        set_link
-    elif [ "$arg1" == "session" ]; then
-        session
-    else
-        echo "invalid parameter"
-        exit 1
-    fi
+    case "$arg1" in
+        "enable" | "on" )
+                sed -i 's/AutomaticLoginEnable=False/AutomaticLoginEnable=True/g' /etc/gdm/custom.conf
+                echo "Kiosk enable"
+                reboot
+        ;;
+        "disable" | "off" )
+                sed -i 's/AutomaticLoginEnable=True/AutomaticLoginEnable=False/g' /etc/gdm/custom.conf
+                echo "Kiosk disable"
+                reboot
+        ;;
+        "set" )
+                set_link
+        ;;
+        "session" )
+                session
+        ;;
+        "help" | "h" | "" | "--h" | "--help")
+                help
+        ;;
+        *)
+            echo "invalid parameter"
+            exit 1
+        ;;
+    esac
 }
 
 #Start program
