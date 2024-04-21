@@ -1,8 +1,12 @@
 # Linux kiosk web mode
 
+## Compatible distros:
+- RHEL 9.x like (RHEL, Oracle Linux, Rocky, etc)
+- CentOS Stream 9
+
 ## Requirements
-- Operation System: RHEL 9.x like (RHEL, OL, Rocky, etc) newly installed
-- Root or sudo user configured and with ssh access available
+- Operation System newly installed
+- Root or sudo user configured and ssh access available
 - Desktop environment: GNOME
 - Browser: Firefox
 
