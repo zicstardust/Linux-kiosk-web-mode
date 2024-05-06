@@ -1,7 +1,7 @@
 # Linux kiosk web mode
 
 ## Compatible distros:
-- RHEL 9.x like (RHEL, Oracle Linux, Rocky, etc)
+- RHEL 9.X like (RHEL, Oracle Linux, Rocky, AlmaLinux, etc)
 - CentOS Stream 9
 
 ## Requirements
