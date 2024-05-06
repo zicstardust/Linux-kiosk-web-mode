@@ -38,11 +38,11 @@ session(){
     fi
     
     if [ "$arg2" == "wayland" ]; then
-        sed -i 's/WaylandEnable=false/#WaylandEnable=false/g' /etc/gdm/custom.conf
+        sed -i 's/WaylandEnable=false/WaylandEnable=true/g' /etc/gdm/custom.conf
         echo "set Wayland session"
         reboot
     elif [ "$arg2" == "x11" ]; then
-        sed -i 's/#WaylandEnable=false/WaylandEnable=false/g' /etc/gdm/custom.conf
+        sed -i 's/WaylandEnable=true/WaylandEnable=false/g' /etc/gdm/custom.conf
         echo "set X11 session"
         reboot
     else
