@@ -8,11 +8,10 @@
 - Operation System newly installed
 - Root or sudo user configured and ssh access available
 - Desktop environment: GNOME
-- Browser: Firefox
+- Browser: Firefox or Google Chrome
 
 ## Install
 
-#### Default: DNF auto update enable
 ```bash
 curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/install.sh | sudo bash
 ```
@@ -26,7 +25,12 @@ curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/ins
 
 ### Configure:
 ```bash
-sudo kiosk-config set "<YOUR LINK HTTP/HTTPS HERE>"
+sudo kiosk-config set "<LINK HTTP/HTTPS HERE>"
+```
+
+### Configure with Google Chrome:
+```bash
+sudo kiosk-config set "<LINK HTTP/HTTPS HERE>" --chrome
 ```
 
 ### Enable/Disable kiosk mode:

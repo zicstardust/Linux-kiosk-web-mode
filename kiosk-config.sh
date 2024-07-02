@@ -9,7 +9,7 @@ LINUX KIOSK MODE
 How to use:
 
 kiosk-config set "<YOUR URL HERE>"
-kiosk-config set "<YOUR URL HERE>" --reboot
+kiosk-config set "<YOUR URL HERE>" --chrome
     Set kiosk URL
 
 kiosk-config enable
@@ -52,23 +52,28 @@ session(){
 }
 
 set_link(){
-if [ -z "$arg2" ]; then
-    echo "parameter missing"
-    exit 1
-fi
+    if [ -z "$arg2" ]; then
+        echo "parameter missing"
+        exit 1
+    fi
+
+    if [ "$arg3" == "--chrome"]; then
+        $command = "google-chrome -kiosk \"$arg2\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
+        $browser = "chrome"
+    else
+        $command = "firefox -kiosk \"$arg2\""
+        $browser = "firefox"
+    fi
+
     cat > /home/kiosk/.local/bin/gnome-kiosk-script << CONFIG
 #!/bin/sh
-firefox -kiosk "$arg2"
+$command
 sleep 1.0
 exec "\$0" "\$@"
 CONFIG
     chmod +x /home/kiosk/.local/bin/gnome-kiosk-script
     echo "Set kiosk: $arg2"
-    if [ "$arg3" == "--reboot" ]; then
-        reboot
-    else
-        killall firefox &> /dev/null
-    fi
+    killall $browser &> /dev/null
 }
 
 main () {
