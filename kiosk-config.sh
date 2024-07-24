@@ -57,12 +57,12 @@ set_link(){
         exit 1
     fi
 
-    if [ "$arg3" == "--chrome"]; then
-        $command = "google-chrome -kiosk \"$arg2\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
-        $browser = "chrome"
+    if [ "$arg3" == "--chrome" ]; then
+        command="google-chrome -kiosk \"$arg2\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
+        browser="chrome"
     else
-        $command = "firefox -kiosk \"$arg2\""
-        $browser = "firefox"
+        command="firefox -kiosk \"$arg2\""
+        browser="firefox"
     fi
 
     cat > /home/kiosk/.local/bin/gnome-kiosk-script << CONFIG
