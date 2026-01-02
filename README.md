@@ -62,3 +62,6 @@ sudo kiosk-config session wayland
 ```bash
 sudo kiosk-config session x11
 ```
+
+### More info
+[README GNOME Kiosk](https://gitlab.gnome.org/GNOME/gnome-kiosk/-/blob/main/README.md)
