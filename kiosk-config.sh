@@ -33,16 +33,17 @@ HELP
 }
 
 session(){
-  if [ -z "$arg2" ]; then
+    local session=$1
+    if [ -z "$session" ]; then
         echo "parameter missing"
         exit 1
     fi
     
-    if [ "$arg2" == "wayland" ]; then
+    if [ "$session" == "wayland" ]; then
         sed -i 's/WaylandEnable=false/WaylandEnable=true/g' /etc/gdm/custom.conf
         echo "set Wayland session"
         reboot
-    elif [ "$arg2" == "x11" ]; then
+    elif [ "$session" == "x11" ]; then
         sed -i 's/WaylandEnable=true/WaylandEnable=false/g' /etc/gdm/custom.conf
         echo "set X11 session"
         reboot
@@ -53,20 +54,22 @@ session(){
 }
 
 set_link(){
-    if [ -z "$arg2" ]; then
+    local link=$1
+    local use_browser=$2
+    if [ -z "$link" ]; then
         echo "parameter missing"
         exit 1
     fi
 
-    if [ "$arg3" == "--chrome" ]; then
-        command="google-chrome -kiosk \"$arg2\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
+    if [ "$use_browser" == "--chrome" ]; then
         browser="chrome"
-    elif [ "$arg3" == "--chromium" ]; then
-        command="chromium-browser -kiosk \"$arg2\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
+        command="$browser -kiosk \"$link\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
+    elif [ "$use_browser" == "--chromium" ]; then
         browser="chromium-browser"
+        command="$browser -kiosk \"$link\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
     else
-        command="firefox -kiosk \"$arg2\""
         browser="firefox"
+        command="$browser -kiosk \"$link\""
     fi
 
     cat > /home/kiosk/.local/bin/gnome-kiosk-script << CONFIG
@@ -76,7 +79,7 @@ sleep 1.0
 exec "\$0" "\$@"
 CONFIG
     chmod +x /home/kiosk/.local/bin/gnome-kiosk-script
-    echo "Set kiosk: $arg2"
+    echo "Set kiosk: $link"
     killall $browser &> /dev/null
 }
 
@@ -84,19 +87,17 @@ main () {
     case "$arg1" in
         "enable" | "on" )
                 sed -i 's/AutomaticLoginEnable=False/AutomaticLoginEnable=True/g' /etc/gdm/custom.conf
-                echo "Kiosk enable"
-                reboot
+                echo "Kiosk enable, please reboot system"
         ;;
         "disable" | "off" )
                 sed -i 's/AutomaticLoginEnable=True/AutomaticLoginEnable=False/g' /etc/gdm/custom.conf
-                echo "Kiosk disable"
-                reboot
+                echo "Kiosk disable, please reboot system"
         ;;
         "set" )
-                set_link
+                set_link $arg2 $arg3
         ;;
         "session" )
-                session
+                session $arg2
         ;;
         "help" | "h" | "" | "--h" | "--help")
                 help
