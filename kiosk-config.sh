@@ -110,8 +110,7 @@ main () {
 }
 
 #Start program
-is_root=$(whoami)
-if [ ! $is_root == "root" ]; then
+if [ "$(whoami)" != "root" ]; then
     echo "Please, run as root"
     exit 1
 else
