@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 arg1="$1"
 arg2="$2"
 arg3="$3"
