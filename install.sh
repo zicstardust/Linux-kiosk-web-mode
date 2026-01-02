@@ -50,12 +50,12 @@ AutomaticLogin=kiosk
 EOF
 
 # Download and install kiosk-config
-curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/kiosk-config.sh > /usr/bin/kiosk-config
-chmod +x /usr/bin/kiosk-config
+curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/kiosk-config.sh > /usr/local/bin/kiosk-config
+chmod +x /usr/local/bin/kiosk-config
 
 # Permissions kiosk home folder
 mkdir -p /home/kiosk/.local/bin /home/kiosk/.config
 chown -R kiosk:kiosk /home/kiosk
 
 # Initial config
-/usr/bin/kiosk-config set "gitlab.gnome.org/GNOME/gnome-kiosk/-/blob/main/README.md?ref_type=heads#user-content-gnome-kiosk"
+kiosk-config set "gitlab.gnome.org/GNOME/gnome-kiosk/-/blob/main/README.md?ref_type=heads#user-content-gnome-kiosk"
