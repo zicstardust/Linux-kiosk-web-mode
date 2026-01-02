@@ -20,7 +20,7 @@ passwd -d kiosk
 #install gnome-kiosk session
 dnf -y install gnome-kiosk-script-session
 
-#Configura sessao gnome-kiosk para usuario kiosk
+#Configure session to kiosk user
 cat > /var/lib/AccountsService/users/kiosk << EOF
 [User]
 Session=gnome-kiosk-script
