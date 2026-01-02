@@ -3,7 +3,9 @@ Web kiosk with gnome kiosk and auto update system
 
 ## Compatible distros:
 - RHEL 9.X like (RHEL, Oracle Linux, Rocky, AlmaLinux, etc)
+- RHEL 10.X like (RHEL, Oracle Linux, Rocky, AlmaLinux, etc)
 - CentOS Stream 9
+- CentOS Stream 10
 
 ## Requirements
 - Operation System newly installed
