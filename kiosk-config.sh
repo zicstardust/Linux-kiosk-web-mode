@@ -80,7 +80,8 @@ exec "\$0" "\$@"
 CONFIG
     chmod +x /home/kiosk/.local/bin/gnome-kiosk-script
     echo "Set kiosk: $link"
-    killall $browser &> /dev/null
+    #killall $browser &> /dev/null
+    killall --user kiosk &> /dev/null
 }
 
 main () {
