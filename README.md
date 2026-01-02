@@ -65,5 +65,10 @@ sudo kiosk-config session wayland
 sudo kiosk-config session x11
 ```
 
+### Uninstall
+```bash
+sudo kiosk-config --uninstall
+```
+
 ### More info
 [README GNOME Kiosk](https://gitlab.gnome.org/GNOME/gnome-kiosk/-/blob/main/README.md)

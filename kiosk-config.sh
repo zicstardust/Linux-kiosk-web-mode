@@ -27,6 +27,8 @@ kiosk-config session x11
 kiosk-config session wayland
     Kiosk in Wayland session
 
+kiosk-config --uninstall
+    Uninstall kiosk-config
 HELP
     cat /tmp/kiosk-config
     rm -f /tmp/kiosk-config
@@ -84,6 +86,15 @@ CONFIG
     killall --user kiosk &> /dev/null
 }
 
+
+uninstall (){
+    kiosk-config disable
+    rm -f /usr/local/bin/kiosk-config
+    userdel -r kiosk
+    dnf remove -y gnome-kiosk gnome-kiosk-script-session dnf-automatic
+    rm -Rf /home/kiosk
+}
+
 main () {
     case "$arg1" in
         "enable" | "on" )
@@ -99,6 +110,9 @@ main () {
         ;;
         "session" )
                 session $arg2
+        ;;
+        "--uninstall" )
+                uninstall
         ;;
         "help" | "h" | "" | "--h" | "--help")
                 help
