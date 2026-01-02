@@ -21,6 +21,7 @@ passwd -d kiosk
 dnf -y install gnome-kiosk-script-session
 
 #Configure session to kiosk user
+mkdir -p /var/lib/AccountsService/users
 cat > /var/lib/AccountsService/users/kiosk << EOF
 [User]
 Session=gnome-kiosk-script
@@ -28,6 +29,7 @@ SystemAccount=false
 EOF
 
 #Config GDM
+mkdir -p /etc/gdm
 cat > /etc/gdm/custom.conf << EOF
 # GDM configuration storage
  
