@@ -9,7 +9,7 @@ Web kiosk with gnome kiosk and auto update system
 - Operation System newly installed
 - Root or sudo user configured and ssh access available
 - Desktop environment: GNOME
-- Browser: Firefox or Google Chrome
+- Browser: Firefox, Chromium or Google Chrome
 
 ## Install
 
@@ -24,7 +24,7 @@ curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/ins
 
 ## Use
 
-### Configure:
+### Configure with Firefox (Default):
 ```bash
 sudo kiosk-config set "<LINK HTTP/HTTPS HERE>"
 ```
@@ -32,6 +32,11 @@ sudo kiosk-config set "<LINK HTTP/HTTPS HERE>"
 ### Configure with Google Chrome:
 ```bash
 sudo kiosk-config set "<LINK HTTP/HTTPS HERE>" --chrome
+```
+
+### Configure with Chromium:
+```bash
+sudo kiosk-config set "<LINK HTTP/HTTPS HERE>" --chromium
 ```
 
 ### Enable/Disable kiosk mode:

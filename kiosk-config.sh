@@ -10,6 +10,7 @@ How to use:
 
 kiosk-config set "<YOUR URL HERE>"
 kiosk-config set "<YOUR URL HERE>" --chrome
+kiosk-config set "<YOUR URL HERE>" --chromium
     Set kiosk URL
 
 kiosk-config enable
@@ -60,6 +61,9 @@ set_link(){
     if [ "$arg3" == "--chrome" ]; then
         command="google-chrome -kiosk \"$arg2\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
         browser="chrome"
+    elif [ "$arg3" == "--chromium" ]; then
+        command="chromium-browser -kiosk \"$arg2\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
+        browser="chromium-browser"
     else
         command="firefox -kiosk \"$arg2\""
         browser="firefox"
