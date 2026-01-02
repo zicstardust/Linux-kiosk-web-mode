@@ -1,4 +1,5 @@
 # Linux kiosk web mode
+Web kiosk with gnome kiosk and auto update system 
 
 ## Compatible distros:
 - RHEL 9.X like (RHEL, Oracle Linux, Rocky, AlmaLinux, etc)
