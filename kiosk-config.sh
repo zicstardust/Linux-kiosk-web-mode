@@ -21,12 +21,6 @@ kiosk-config disable
 kiosk-config off
     Disable autologin kiosk user
 
-kiosk-config session x11
-    Kiosk in X11 session
-
-kiosk-config session wayland
-    Kiosk in Wayland session
-
 kiosk-config --uninstall
     Uninstall kiosk-config
 HELP
