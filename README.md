@@ -53,18 +53,6 @@ sudo kiosk-config enable
 sudo kiosk-config disable
 ```
 
-### Change Wayland or X11
-
-#### Use Wayland (Default):
-```bash
-sudo kiosk-config session wayland
-```
-
-#### Use X11:
-```bash
-sudo kiosk-config session x11
-```
-
 ### Uninstall
 ```bash
 sudo kiosk-config --uninstall

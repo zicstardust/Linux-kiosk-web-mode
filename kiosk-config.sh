@@ -34,27 +34,6 @@ HELP
     rm -f /tmp/kiosk-config
 }
 
-session(){
-    local session=$1
-    if [ -z "$session" ]; then
-        echo "parameter missing"
-        exit 1
-    fi
-    
-    if [ "$session" == "wayland" ]; then
-        sed -i 's/WaylandEnable=false/WaylandEnable=true/g' /etc/gdm/custom.conf
-        echo "set Wayland session"
-        reboot
-    elif [ "$session" == "x11" ]; then
-        sed -i 's/WaylandEnable=true/WaylandEnable=false/g' /etc/gdm/custom.conf
-        echo "set X11 session"
-        reboot
-    else
-        echo "invalid parameter"
-        exit 1
-    fi
-}
-
 set_link(){
     local link=$1
     local use_browser=$2
@@ -91,7 +70,7 @@ uninstall (){
     kiosk-config disable
     rm -f /usr/local/bin/kiosk-config
     userdel -r kiosk
-    dnf remove -y gnome-kiosk gnome-kiosk-script-session dnf-automatic
+    dnf remove -y gnome-kiosk dnf-automatic
     rm -Rf /home/kiosk
 }
 
@@ -107,9 +86,6 @@ main () {
         ;;
         "set" )
                 set_link $arg2 $arg3
-        ;;
-        "session" )
-                session $arg2
         ;;
         "--uninstall" )
                 uninstall
