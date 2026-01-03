@@ -21,7 +21,7 @@ passwd -d kiosk
 dnf -y install gnome-kiosk-script-session
 
 
-rhel_version=$(cat cat /etc/redhat-release)
+rhel_version=$(cat /etc/redhat-release)
 if [[ $rhel_version == *" 10."* ]]; then
   gnome_kiosk_session="gnome-kiosk-script-wayland"
 elif [[ $rhel_version == *" 9."* ]]; then
@@ -40,19 +40,18 @@ EOF
 mkdir -p /etc/gdm
 cat > /etc/gdm/custom.conf << EOF
 [daemon]
-TimedLoginEnable=true
-TimedLogin=kiosk
-TimedLoginDelay=1
+AutomaticLoginEnable=True
+AutomaticLogin=kiosk
+WaylandEnable=true
 EOF
 
 # Download and install kiosk-config
-curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/kiosk-config.sh > /usr/local/bin/kiosk-config
-chmod +x /usr/local/bin/kiosk-config
+curl https://raw.githubusercontent.com/zicstardust/Linux-kiosk-web-mode/main/kiosk-config.sh > /usr/bin/kiosk-config
+chmod +x /usr/bin/kiosk-config
 
 # Permissions kiosk home folder
 mkdir -p /home/kiosk/.local/bin /home/kiosk/.config
 chown -R kiosk:kiosk /home/kiosk
 
 # Initial config
-/usr/local/bin/kiosk-config enable
-/usr/local/bin/kiosk-config set "https://github.com/zicstardust/Linux-kiosk-web-mode/blob/main/README.md#use"
+/usr/bin/kiosk-config set "https://github.com/zicstardust/Linux-kiosk-web-mode/blob/main/README.md#use"

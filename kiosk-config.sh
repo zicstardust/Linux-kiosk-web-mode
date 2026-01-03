@@ -57,7 +57,7 @@ CONFIG
 
 
 uninstall (){
-    rm -f /usr/local/bin/kiosk-config
+    rm -f /usr/bin/kiosk-config
     userdel -r kiosk
     rm -f /var/lib/AccountsService/users/kiosk
     rm -f /etc/gdm/custom.conf
