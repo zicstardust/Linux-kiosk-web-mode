@@ -57,12 +57,13 @@ CONFIG
 
 
 uninstall (){
-    rm -f /usr/bin/kiosk-config
-    userdel -r kiosk
     rm -f /var/lib/AccountsService/users/kiosk
     rm -f /etc/gdm/custom.conf
-    dnf remove -y gnome-kiosk dnf-automatic
+    killall --user kiosk
+    userdel kiosk
     rm -Rf /home/kiosk
+    dnf remove -y gnome-kiosk dnf-automatic
+    rm -f /usr/bin/kiosk-config
     echo "kiosk-config uninstalled, please reboot your system"
 }
 
