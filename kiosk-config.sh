@@ -37,14 +37,11 @@ set_link(){
     fi
 
     if [ "$use_browser" == "--chrome" ]; then
-        browser="chrome"
-        command="$browser -kiosk \"$link\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
+        command="chrome -kiosk \"$link\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
     elif [ "$use_browser" == "--chromium" ]; then
-        browser="chromium-browser"
-        command="$browser -kiosk \"$link\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
+        command="chromium-browser -kiosk \"$link\" --ignore-certificate-errors --password-store=basic --no-first-run --disable-first-run-ui"
     else
-        browser="firefox"
-        command="$browser -kiosk \"$link\""
+        command="firefox -kiosk \"$link\""
     fi
 
     cat > /home/kiosk/.local/bin/gnome-kiosk-script << CONFIG
@@ -55,7 +52,6 @@ exec "\$0" "\$@"
 CONFIG
     chmod +x /home/kiosk/.local/bin/gnome-kiosk-script
     echo "Set kiosk: $link"
-    #killall $browser &> /dev/null
     killall --user kiosk &> /dev/null
 }
 
