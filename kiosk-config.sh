@@ -63,17 +63,18 @@ uninstall (){
     rm -f /etc/gdm/custom.conf
     dnf remove -y gnome-kiosk dnf-automatic
     rm -Rf /home/kiosk
+    echo "kiosk-config uninstalled, please reboot your system"
 }
 
 main () {
     case "$arg1" in
         "enable" | "on" )
                 sed -i 's/AutomaticLoginEnable=False/AutomaticLoginEnable=True/g' /etc/gdm/custom.conf
-                echo "Kiosk enable, please reboot system"
+                echo "Kiosk enable, please reboot your system"
         ;;
         "disable" | "off" )
                 sed -i 's/AutomaticLoginEnable=True/AutomaticLoginEnable=False/g' /etc/gdm/custom.conf
-                echo "Kiosk disable, please reboot system"
+                echo "Kiosk disable, please reboot your system"
         ;;
         "set" )
                 set_link $arg2 $arg3
