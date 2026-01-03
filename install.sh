@@ -20,34 +20,29 @@ passwd -d kiosk
 #install gnome-kiosk session
 dnf -y install gnome-kiosk-script-session
 
+
+rhel_version=$(cat cat /etc/redhat-release)
+if [[ $rhel_version == *" 10."* ]]; then
+  gnome_kiosk_session="gnome-kiosk-script-wayland"
+elif [[ $rhel_version == *" 9."* ]]; then
+  gnome_kiosk_session="gnome-kiosk-script"
+fi
+
 #Configure session to kiosk user
 mkdir -p /var/lib/AccountsService/users
 cat > /var/lib/AccountsService/users/kiosk << EOF
 [User]
-Session=gnome-kiosk-script
+Session=${gnome_kiosk_session}
 SystemAccount=false
 EOF
 
 #Config GDM
 mkdir -p /etc/gdm
 cat > /etc/gdm/custom.conf << EOF
-# GDM configuration storage
- 
 [daemon]
-# Uncomment the line below to force the login screen to use Xorg
-WaylandEnable=true
-AutomaticLoginEnable=True
-AutomaticLogin=kiosk
- 
-[security]
- 
-[xdmcp]
- 
-[chooser]
- 
-[debug]
-# Uncomment the line below to turn on debugging
-#Enable=true
+TimedLoginEnable=true
+TimedLogin=kiosk
+TimedLoginDelay=1
 EOF
 
 # Download and install kiosk-config
@@ -59,4 +54,5 @@ mkdir -p /home/kiosk/.local/bin /home/kiosk/.config
 chown -R kiosk:kiosk /home/kiosk
 
 # Initial config
-kiosk-config set "https://github.com/zicstardust/Linux-kiosk-web-mode/blob/main/README.md#use"
+/usr/local/bin/kiosk-config enable
+/usr/local/bin/kiosk-config set "https://github.com/zicstardust/Linux-kiosk-web-mode/blob/main/README.md#use"
